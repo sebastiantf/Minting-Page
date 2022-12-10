@@ -1,12 +1,13 @@
 import { DecentSDK, edition } from "@decent.xyz/sdk";
-import { useSigner } from "wagmi";
+import { usePrivy } from '@privy-io/react-auth';
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import handleTxError from "../lib/handleTxError";
 
+
 const MintButton = (props:any) => {
-  const { data:signer } = useSigner();
+  const { getEthersProvider } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
 
   const onSigning = (isMinting:boolean) => {
@@ -23,10 +24,10 @@ const MintButton = (props:any) => {
   }
 
   const mint = async () => {
-    if (signer) {
+    if (getEthersProvider().getSigner()) {
       try {
         onSigning?.(true);
-        const sdk = new DecentSDK(props.chainId, signer);
+        const sdk = new DecentSDK(props.chainId, getEthersProvider().getSigner());
         const nftOne = await edition.getContract(sdk, props.contractAddress);
         const tx = await nftOne.mint(1, { value: ethers.utils.parseEther(props.price) }); //could add a state variable + input number type here to enable batch minting
         const receipt = await tx.wait();
