@@ -28,16 +28,16 @@ const ConnectButton = () => {
         <RxDotFilled className="text-green-500" />
         <button
           className='text-white tracking-widest rounded-full font-[500]'
-          disabled
+          onClick={logout}
         >
           {truncate(user.wallet.address)}
         </button>
       </div> :
       <button
         onClick={login}
-        className='bg-violet-700 text-white hover:bg-white hover:text-violet-700 px-5 py-1 rounded-full font-[500]'
+        className='bg-white text-violet-700 hover:bg-opacity-80 hover:drop-shadow-md px-5 py-1 rounded-full font-[500]'
       >
-        Connect
+        Connect Wallet
       </button>
     }
     </>
