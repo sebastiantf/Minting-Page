@@ -1,47 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./navbar.module.css";
-import { usePrivy } from '@privy-io/react-auth';
+import LoginButton from "./LoginButton";
 import { RxDotFilled } from "react-icons/rx";
+import { useState, useEffect } from "react";
 
 interface NavItemProps {
   href: string;
   children: string | JSX.Element;
   openInNewTab?: boolean;
-}
-
-const ConnectButton = () => {
-  const { ready, authenticated, user, login, logout } = usePrivy();
-
-  const truncate = (text: string) => {
-    return text.substring(0, 4) + '...' + text.substring(text.length - 4);
-  }
-
-  if (!ready) {
-    return null;
-  }
-
-  return(
-    <>
-    {authenticated && user?.wallet ? 
-      <div className="flex gap-1 items-center">
-        <RxDotFilled className="text-green-500" />
-        <button
-          className='text-white tracking-widest rounded-full font-[500]'
-          onClick={logout}
-        >
-          {truncate(user.wallet.address)}
-        </button>
-      </div> :
-      <button
-        onClick={login}
-        className='bg-white text-violet-700 hover:bg-opacity-80 hover:drop-shadow-md px-5 py-1 rounded-full font-[500]'
-      >
-        Connect Wallet
-      </button>
-    }
-    </>
-  )
 }
 
 const Navbar = () => {
@@ -62,7 +29,7 @@ const Navbar = () => {
     <>
       <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center`} >
         <NavItem href="http://decent.xyz/" openInNewTab><Image width={100} height={40} src="/images/decent.png" alt="decent" /></NavItem>  
-        <ConnectButton />
+        <LoginButton />
       </nav>
     </>
 

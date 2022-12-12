@@ -10,6 +10,10 @@ const errorMessages = [
     error: "err: insufficient funds for gas",
     solution: "Insufficient balance. Add more funds to your wallet.",
   },
+  {
+    error: "A wallet request of type eth_accounts was made to a disconnected wallet",
+    solution: "Please switch network to Ethereum Mainnet.",
+  },
 ];
 
 const handleTxError = (error:any) => {
