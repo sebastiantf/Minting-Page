@@ -73,7 +73,7 @@ const Home: NextPage = () => {
                 </div>
               </div>
               <MintButton chainId={CHAINID} contractAddress={contractAddress} price={.05} setQuantity={setAnthologyQuantity} quantity={anthologyQuantity} openseaLink={openseaLink} />
-              <MarketplaceButtons openseaLink={openseaLink} contractAddress={contractAddress} />
+              <MarketplaceButtons openseaLink={openseaLink} contractAddress={contractAddress} chain={1} />
             </div>
           </div>
         </div>
