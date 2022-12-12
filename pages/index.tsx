@@ -26,7 +26,7 @@ const Home: NextPage = () => {
   
   // required to display the mint counts you'll see below
   const updateContractInfo = async () => {
-    const provider = ethers.getDefaultProvider(RPC); //add RPC as parameter for goerli
+    const provider = ethers.getDefaultProvider(); //add RPC as parameter for goerli
     const sdk = new DecentSDK(CHAINID, provider);
     const anthology = await edition.getContract(sdk, ANTHOLOGY);
     const ruffdraft = await edition.getContract(sdk, RUFFDRAFT);
