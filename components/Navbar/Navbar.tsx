@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./navbar.module.css";
 import { usePrivy } from '@privy-io/react-auth';
+import { RxDotFilled } from "react-icons/rx";
 
 interface NavItemProps {
   href: string;
@@ -23,12 +24,15 @@ const ConnectButton = () => {
   return(
     <>
     {authenticated && user?.wallet ? 
-      <button
-        className='bg-violet-700 text-white px-5 py-1 rounded-full font-[500]'
-        disabled
-      >
-        {truncate(user.wallet.address)}
-      </button> :
+      <div className="flex gap-1 items-center">
+        <RxDotFilled className="text-green-500" />
+        <button
+          className='text-white tracking-widest rounded-full font-[500]'
+          disabled
+        >
+          {truncate(user.wallet.address)}
+        </button>
+      </div> :
       <button
         onClick={login}
         className='bg-violet-700 text-white hover:bg-white hover:text-violet-700 px-5 py-1 rounded-full font-[500]'
