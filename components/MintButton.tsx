@@ -1,13 +1,14 @@
 import { DecentSDK, edition } from "@decent.xyz/sdk";
-import { useSigner } from "wagmi";
+import { usePrivy } from '@privy-io/react-auth';
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 
+
 const MintButton = (props:any) => {
-  const { data:signer } = useSigner();
+  const { getEthersProvider } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
 
   const onSigning = (isMinting:boolean) => {
@@ -24,10 +25,10 @@ const MintButton = (props:any) => {
   }
 
   const mint = async () => {
-    if (signer) {
+    if (getEthersProvider().getSigner()) {
       try {
         onSigning?.(true);
-        const sdk = new DecentSDK(props.chainId, signer);
+        const sdk = new DecentSDK(props.chainId, getEthersProvider().getSigner());
         const price:number = props.price * props.quantity;
         const nftOne = await edition.getContract(sdk, props.contractAddress);
         const tx = await nftOne.mint(props.quantity, { value: ethers.utils.parseEther(price.toString()) });
