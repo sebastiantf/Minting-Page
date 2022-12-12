@@ -92,7 +92,7 @@ const Home: NextPage = () => {
         <div className='text-center space-y-3 w-80'>
           <div className='h-80 relative'>
             <div style={{ height: "100%", width: "100%" }}>
-              <Image className="rounded-lg" src="/images/dilla-picture.jpg" object-fit="contain" fill alt={'dilla'} />
+              <Image className="rounded-lg" src="/images/dilla-picture.png" object-fit="contain" fill alt={'dilla'} />
             </div>
           </div>
           <p className='tracking-widest text-2xl font-[600]'>Ruff Draft</p>
