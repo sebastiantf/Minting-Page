@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <>
       <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center`} >
-        <NavItem href="http://decent.xyz/" openInNewTab><Image width={100} height={40} src="/images/decent.png" alt="decent" /></NavItem>  
+        <NavItem href="http://burble.it" openInNewTab><Image width={20} height={20} src="/images/burble-icon.png" alt="decent" /></NavItem>  
         <LoginButton />
       </nav>
     </>
