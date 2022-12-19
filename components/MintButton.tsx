@@ -8,8 +8,11 @@ import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
 
 const MintButton = (props:any) => {
-  const { ready, authenticated, user, linkWallet, getEthersProvider } = usePrivy();
+  const { ready, authenticated, linkWallet, getEthersProvider } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider.getSigner();
 
   const onSigning = (isMinting:boolean) => {
     setIsMinting(isMinting || false);
@@ -25,10 +28,10 @@ const MintButton = (props:any) => {
   }
 
   const mint = async () => {
-    if (user?.wallet) {
+    if (signer) {
       try {
         onSigning?.(true);
-        const sdk = new DecentSDK(props.chainId, getEthersProvider().getSigner());
+        const sdk = new DecentSDK(props.chainId, signer as any);
         const price:number = props.price * props.quantity;
         const nftOne = await edition.getContract(sdk, props.contractAddress);
         const tx = await nftOne.mint(props.quantity, { value: ethers.utils.parseEther(price.toString()) });

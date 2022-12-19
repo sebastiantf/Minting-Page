@@ -27,7 +27,7 @@ const Home: NextPage = () => {
   // required to display the mint counts you'll see below
   const updateContractInfo = async () => {
     const provider = ethers.getDefaultProvider(); //add RPC as parameter for goerli
-    const sdk = new DecentSDK(CHAINID, provider);
+    const sdk = new DecentSDK(CHAINID, provider as any);
     const anthology = await edition.getContract(sdk, ANTHOLOGY);
     const ruffdraft = await edition.getContract(sdk, RUFFDRAFT);
     const madukes = await edition.getContract(sdk, MADUKES);
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
         name="description"
         content='Custom mint site by decent.xyz for fans to mint NFTs from the J Dilla collection.'
       />
-      <link rel="icon" href="/images/burble-icon.png" />
+      <link rel="icon" href="/images/dilla-picture.png" />
     </Head>
 
     <main className={`${styles.main} lg:mx-20 sm:mx-10 xs:mx-2`}>

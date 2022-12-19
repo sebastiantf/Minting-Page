@@ -15,7 +15,7 @@
     "@privy-io/react-auth": "^1.8.0",
     "@typeform/embed-react": "^2.7.0",
     "@vercel/analytics": "^0.1.5",
-    "ethers": "^5.0.0",
+    "ethers": "^5.7.2",
     "next": "^13.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
