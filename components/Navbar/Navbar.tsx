@@ -2,8 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./navbar.module.css";
 import LoginButton from "./LoginButton";
-import { RxDotFilled } from "react-icons/rx";
-import { useState, useEffect } from "react";
 
 interface NavItemProps {
   href: string;
