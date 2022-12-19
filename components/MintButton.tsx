@@ -8,7 +8,7 @@ import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
 
 const MintButton = (props:any) => {
-  const { ready, authenticated, linkWallet, getEthersProvider } = usePrivy();
+  const { ready, authenticated, linkWallet } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
