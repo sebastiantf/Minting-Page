@@ -2,7 +2,7 @@ import { DecentSDK, edition } from "@decent.xyz/sdk";
 import { usePrivy } from '@privy-io/react-auth';
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
@@ -10,9 +10,10 @@ import MarketplaceButtons from "./MarketplaceButtons";
 const MintButton = (props:any) => {
   const { ready, authenticated, linkWallet } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
+  const [error, setError] = useState('');
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
+  const provider = authenticated && new ethers.providers.Web3Provider(window.ethereum);
+  const signer = provider ? provider.getSigner() : null;
 
   const onSigning = (isMinting:boolean) => {
     setIsMinting(isMinting || false);
