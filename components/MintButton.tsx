@@ -10,7 +10,6 @@ import MarketplaceButtons from "./MarketplaceButtons";
 const MintButton = (props:any) => {
   const { ready, authenticated, linkWallet } = usePrivy();
   const [isMinting, setIsMinting] = useState(false);
-  const [error, setError] = useState('');
 
   const provider = authenticated && new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider ? provider.getSigner() : null;
