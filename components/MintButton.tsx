@@ -2,7 +2,7 @@ import { DecentSDK, edition } from "@decent.xyz/sdk";
 import { usePrivy } from '@privy-io/react-auth';
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
