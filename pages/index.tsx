@@ -7,6 +7,7 @@ import MintButton from "../components/MintButton";
 import Link from 'next/link';
 import { DecentSDK, edition } from "@decent.xyz/sdk";
 import { ethers } from "ethers";
+import Typeform from '../components/Typeform';
 
 const Home: NextPage = () => {
   const RPC = "https://ethereum-goerli-rpc.allthatnode.com"; //for testing on Ethereum goerli; do not need for mainnet - other chains have different RPC endpoints you'll have to input here if contract is not on Ethereum mainnet
@@ -126,6 +127,11 @@ const Home: NextPage = () => {
             <li>Hidden audio message recorded by Ma Dukes</li>
           </div>
         </div>
+      </div>
+
+      
+      <div className='h-full w-full lg:mt-12 mt-8 flex justify-center'>
+        <Typeform />
       </div>
     </main>
 
