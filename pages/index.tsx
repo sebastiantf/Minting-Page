@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const [ruffdraftMints, setRuffdraftMints] = useState(0);
   const [madukesMints, setMadukesMints] = useState(0);
 
-
+  const [showTypeForm, setShowTypeform] = useState(false);
   
   // required to display the mint counts you'll see below
   const updateContractInfo = async () => {
@@ -116,7 +116,7 @@ const Home: NextPage = () => {
             </div>
           </div>
           <p className='tracking-widest text-2xl font-[600]'>Ma Dukes Says</p>
-          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity}  openseaLink={maDukesLink} />
+          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity} openseaLink={maDukesLink} setShowTypeform={setShowTypeform} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md text-center'>
             <p>Price: 0.3 ETH</p>
             <p>Minted: {madukesMints}/444</p> 
@@ -129,10 +129,11 @@ const Home: NextPage = () => {
         </div>
       </div>
 
-      
+      {showTypeForm &&
       <div className='h-full w-full lg:mt-12 mt-8 flex justify-center'>
         <Typeform />
       </div>
+      }
     </main>
 
     <footer className='py-8 border-t border-white text-white justify-center flex items-center'>
