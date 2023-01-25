@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { DecentSDK, edition } from "@decent.xyz/sdk";
 import { ethers } from "ethers";
 import Typeform from '../components/Typeform';
+import Toggle from '../components/Toggle';
 
 const Home: NextPage = () => {
   const RPC = "https://ethereum-goerli-rpc.allthatnode.com"; //for testing on Ethereum goerli; do not need for mainnet - other chains have different RPC endpoints you'll have to input here if contract is not on Ethereum mainnet
@@ -25,6 +26,10 @@ const Home: NextPage = () => {
   const [madukesMints, setMadukesMints] = useState(0);
 
   const [showTypeForm, setShowTypeform] = useState(false);
+
+  const [anthologyCC, setAnthologyCC] = useState(true);
+  const [ruffdraftCC, setRuffdraftCC] = useState(true);
+  const [madukesCC, setMadukesCC] = useState(true);
   
   // required to display the mint counts you'll see below
   const updateContractInfo = async () => {
@@ -68,20 +73,21 @@ const Home: NextPage = () => {
         <div className='text-center'>
           <p className='text-xl font-[400] uppercase tracking-widest'>The Official</p><h1 className={`${styles.title} font-[600]`}>J Dilla Legacy Collection</h1>
         </div>
-        <div className={`${styles.description} text-center font-[300]`}>
+        <div className={`${styles.description} text-center font-[400]`}>
           {`The J Dilla Legacy Collection is a web3 digital collection that creates a new way to experience the musical impact of J Dilla. It includes some of the most iconic artwork made by renowned artist Desiree Kelly, exclusive physical collectors items, and interactive music collectibles that cannot be found anywhere else. All of this will lead to an ultimate music Block Party experience in the metaverse. The collection is designed to give fans a glimpse into the life and work of one of hip-hop's most influential artists curated through the eyes of the person who knew him best - his mother, Ma Dukes.`}
         </div>
       </div>
 
       <div className='flex flex-wrap lg:justify-between gap-8 justify-center mt-10'>
         <div className='text-center space-y-3 w-80'>
+        <p className='tracking-widest text-3xl font-[600] pb-2'>J Dilla Anthology</p>
           <div className='h-80 relative'>
             <div style={{ height: "100%", width: "100%" }}>
               <Image className="rounded-lg" src="/images/crosswords.png" object-fit="contain" fill alt={'crosswords'} />
             </div>
           </div>
-          <p className='tracking-widest text-2xl font-[600]'>J Dilla Anthology</p>
-          <MintButton chainId={CHAINID} contractAddress={ANTHOLOGY} price={.05} setQuantity={setAnthologyQuantity} quantity={anthologyQuantity} openseaLink={anthologyLink} />
+          <MintButton chainId={CHAINID} contractAddress={ANTHOLOGY} price={.05} setQuantity={setAnthologyQuantity} quantity={anthologyQuantity} openseaLink={anthologyLink} state={anthologyCC} />
+          <Toggle state={anthologyCC} setState={setAnthologyCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.05 ETH</p>
             <p>Minted: {anthologyMints}/3,333</p>
@@ -92,13 +98,14 @@ const Home: NextPage = () => {
         </div>
 
         <div className='text-center space-y-3 w-80'>
+          <p className='tracking-widest text-3xl font-[600] pb-2'>Ruff Draft</p>
           <div className='h-80 relative'>
             <div style={{ height: "100%", width: "100%" }}>
               <Image className="rounded-lg" src="/images/dilla-picture.png" object-fit="contain" fill alt={'dilla'} />
             </div>
           </div>
-          <p className='tracking-widest text-2xl font-[600]'>Ruff Draft</p>
-          <MintButton chainId={CHAINID} contractAddress={RUFFDRAFT} price={0.2} setQuantity={setRuffDraftQuantity} quantity={ruffDraftQuantity}  openseaLink={ruffDraftLink} />
+          <MintButton chainId={CHAINID} contractAddress={RUFFDRAFT} price={0.2} setQuantity={setRuffDraftQuantity} quantity={ruffDraftQuantity} openseaLink={ruffDraftLink} state={ruffdraftCC} />
+          <Toggle state={ruffdraftCC} setState={setRuffdraftCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.2 ETH</p>
             <p>Minted: {ruffdraftMints}/639</p> 
@@ -110,13 +117,14 @@ const Home: NextPage = () => {
         </div>
 
         <div className='text-center space-y-3 w-80'>
+          <p className='tracking-widest text-3xl font-[600] pb-2'>Ma Dukes Says</p>
           <div className='h-80 relative'>
             <div style={{ height: "100%", width: "100%" }}>
             <Image className="rounded-md" src="/images/animation.gif" object-fit="contain" fill alt={'animation'} />
             </div>
           </div>
-          <p className='tracking-widest text-2xl font-[600]'>Ma Dukes Says</p>
-          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity} openseaLink={maDukesLink} setShowTypeform={setShowTypeform} />
+          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity} openseaLink={maDukesLink} setShowTypeform={setShowTypeform} state={madukesCC} />
+          <Toggle state={madukesCC} setState={setMadukesCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md text-center'>
             <p>Price: 0.3 ETH</p>
             <p>Minted: {madukesMints}/444</p> 

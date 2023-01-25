@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@crossmint/client-sdk-react-ui": "^0.2.1-alpha.0",
     "@decent.xyz/sdk": "^0.2.0",
-    "@headlessui/react": "^1.7.5",
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@privy-io/react-auth": "^1.9.0",
     "@typeform/embed-react": "^2.7.0",

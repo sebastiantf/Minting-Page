@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <>
       <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center`} >
-        <NavItem href="http://burble.it" openInNewTab><Image width={20} height={20} src="/images/burble-icon.png" alt="decent" /></NavItem>
+        <NavItem href="http://burble.it" openInNewTab><Image width={24} height={24} src="/images/burble-icon.png" alt="decent" /></NavItem>
         <div className="flex items-center gap-4">
           <LoginButton />
           <Link href='https://github.com/decentxyz/Minting-Page' target='_blank'>

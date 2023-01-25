@@ -6,6 +6,7 @@ import { useState } from "react";
 import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 
 const MintButton = (props:any) => {
   const { ready, authenticated, linkWallet } = usePrivy();
@@ -50,8 +51,24 @@ const MintButton = (props:any) => {
     }
   }
 
+  const clientId = "a9097f3a-840d-409e-b20b-58387af08950"
+
   return <div className="flex gap-4 py-2 items-center px-4 sm:px-0">
+    {props.state ?
+      <>
+        <CrossmintPayButton
+          clientId={clientId}
+          environment="production"
+          mintConfig={{
+            type: "erc-721",
+            totalPrice: (props.price * props.quantity).toString(),
+            _quantity: props.quantity.toString()
+          }}/>
+      </>
+      : <>
       <button className="bg-white hover:bg-opacity-80 hover:drop-shadow-md text-indigo-700 px-5 py-1 rounded-full font-[600] w-full text-lg uppercase" onClick={mint}>{isMinting ? "..." : "Mint"}</button>
+      </>
+      }
       <NumberTicker quantity={props.quantity} setQuantity={props.setQuantity} />
       <MarketplaceButtons openseaLink={props.openseaLink} />
     </div>;
