@@ -59,3 +59,19 @@ h1 {
   color: #730FE6; } 
   ::selection { background-color: #F1E7FC; 
   color: #730FE6; }
+
+  button.xmint-btn {
+    background-color: rgb(255, 255, 255);
+  }
+
+  button.xmint-btn span {
+    display: none;
+    color: #730FE6;
+    font-size: small;
+  }
+
+  button.xmint-btn:after {
+    content: "Mint";
+    color: #730FE6;
+    padding-right: 8px;
+}

@@ -50,19 +50,17 @@ const MintButton = (props:any) => {
       }
     }
   }
-
-  const clientId = "a9097f3a-840d-409e-b20b-58387af08950"
-
-  return <div className="flex gap-4 py-2 items-center px-4 sm:px-0">
+  return <div className="flex gap-4 py-2 items-center px-4 sm:px-0 justify-between mx-4">
     {props.state ?
       <>
         <CrossmintPayButton
-          clientId={clientId}
+          clientId={props.clientId}
           environment="production"
+          className="xmint-btn"
           mintConfig={{
             type: "erc-721",
             totalPrice: (props.price * props.quantity).toString(),
-            _quantity: props.quantity.toString()
+            numberOfTokens: props.quantity
           }}/>
       </>
       : <>
