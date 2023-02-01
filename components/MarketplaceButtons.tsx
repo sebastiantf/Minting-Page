@@ -5,7 +5,7 @@ const MarketplaceButtons = (props:any) => {
 
   return ( 
     <Link href={`https://opensea.io/collection/${props.openseaLink}`} target="_blank" rel="noreferrer">
-    <Image src="/images/opensea.png" height={48} width={48} alt="opensea"/></Link>
+    <Image src="/images/opensea.png" height={36} width={36} alt="opensea"/></Link>
   )
 }
 

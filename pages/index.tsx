@@ -27,8 +27,8 @@ const Home: NextPage = () => {
 
   const [showTypeForm, setShowTypeform] = useState(false);
 
-  const [anthologyCC, setAnthologyCC] = useState(false);
-  const [ruffdraftCC, setRuffdraftCC] = useState(false);
+  const [anthologyCC, setAnthologyCC] = useState(true);
+  const [ruffdraftCC, setRuffdraftCC] = useState(true);
   const [madukesCC, setMadukesCC] = useState(true);
   
   // required to display the mint counts you'll see below
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
               <Image className="rounded-lg" src="/images/crosswords.png" object-fit="contain" fill alt={'crosswords'} />
             </div>
           </div>
-          <MintButton chainId={CHAINID} contractAddress={ANTHOLOGY} price={0.05} setQuantity={setAnthologyQuantity} quantity={anthologyQuantity} openseaLink={anthologyLink} state={anthologyCC} />
+          <MintButton chainId={CHAINID} contractAddress={ANTHOLOGY} price={0.05} setQuantity={setAnthologyQuantity} quantity={anthologyQuantity} openseaLink={anthologyLink} state={anthologyCC} clientId={process.env.NEXT_PUBLIC_JDILLA_ANTHOLOGY_CLIENTID} />
           <Toggle state={anthologyCC} setState={setAnthologyCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.05 ETH</p>
@@ -104,7 +104,7 @@ const Home: NextPage = () => {
               <Image className="rounded-lg" src="/images/dilla-picture.png" object-fit="contain" fill alt={'dilla'} />
             </div>
           </div>
-          <MintButton chainId={CHAINID} contractAddress={RUFFDRAFT} price={0.2} setQuantity={setRuffDraftQuantity} quantity={ruffDraftQuantity} openseaLink={ruffDraftLink} state={ruffdraftCC} />
+          <MintButton chainId={CHAINID} contractAddress={RUFFDRAFT} price={0.2} setQuantity={setRuffDraftQuantity} quantity={ruffDraftQuantity} openseaLink={ruffDraftLink} state={ruffdraftCC} clientId={process.env.NEXT_PUBLIC_RUFF_DRAFT_CLIENTID} />
           <Toggle state={ruffdraftCC} setState={setRuffdraftCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.2 ETH</p>
@@ -123,7 +123,7 @@ const Home: NextPage = () => {
             <Image className="rounded-md" src="/images/animation.gif" object-fit="contain" fill alt={'animation'} />
             </div>
           </div>
-          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity} openseaLink={maDukesLink} setShowTypeform={setShowTypeform} state={madukesCC} clientId={process.env.NEXT_PUBLIC_CROSSMINT_MADUKES_CLIENTID} />
+          <MintButton chainId={CHAINID} contractAddress={MADUKES} price={0.3} setQuantity={setMaDukesQuantity} quantity={maDukesQuantity} openseaLink={maDukesLink} setShowTypeform={setShowTypeform} state={madukesCC} clientId={process.env.NEXT_PUBLIC_MADUKES_CLIENTID} />
           <Toggle state={madukesCC} setState={setMadukesCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md text-center'>
             <p>Price: 0.3 ETH</p>
