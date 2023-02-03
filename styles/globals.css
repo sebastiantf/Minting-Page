@@ -71,7 +71,7 @@ h1 {
   }
 
   button.xmint-btn:after {
-    content: "Mint";
+    content: "Purchase";
     color: #730FE6;
     padding-right: 8px;
 }
