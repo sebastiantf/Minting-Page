@@ -90,7 +90,7 @@ const Home: NextPage = () => {
           <Toggle state={anthologyCC} setState={setAnthologyCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.05 ETH</p>
-            <p>Minted: {anthologyMints}/3,333</p>
+            <p>Minted: {anthologyMints}/77</p>
           </div>
           <div className='text-left'>
             <li>1x Sneaker Contest Entry</li>
@@ -108,7 +108,7 @@ const Home: NextPage = () => {
           <Toggle state={ruffdraftCC} setState={setRuffdraftCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md'>
             <p>Price: 0.2 ETH</p>
-            <p>Minted: {ruffdraftMints}/639</p> 
+            <p>Minted: {ruffdraftMints}/33</p> 
           </div>
           <div className='text-left'>
             <li>4x Sneaker Contest Entry</li>
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
           <Toggle state={madukesCC} setState={setMadukesCC} />
           <div className='space-y-1 w-full p-2 border border-white rounded-md text-center'>
             <p>Price: 0.3 ETH</p>
-            <p>Minted: {madukesMints}/444</p> 
+            <p>Minted: {madukesMints}/12</p> 
           </div>
           <div className='text-left'>
             <li>6x Sneaker Contest Entry</li>
