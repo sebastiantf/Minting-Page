@@ -68,7 +68,7 @@ const MintButton = (props:any) => {
       </>
       }
       <NumberTicker quantity={props.quantity} setQuantity={props.setQuantity} />
-      <MarketplaceButtons openseaLink={props.openseaLink} />
+      <MarketplaceButtons decentLink={props.decentLink} />
     </div>;
 };
 
