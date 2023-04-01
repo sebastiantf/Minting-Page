@@ -1,48 +1,24 @@
 import type { NextPage } from 'next';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import MintButton from "../components/MintButton";
 import Link from 'next/link';
-import { DecentSDK, edition } from "@decent.xyz/sdk";
-import { ethers } from "ethers";
 import Toggle from '../components/Toggle';
 import { getReleaseDetails } from '../lib/getReleaseDetails';
 
-const Home: NextPage = () => {
-  const RPC = "https://ethereum-goerli-rpc.allthatnode.com"; //for testing on Ethereum goerli; do not need for mainnet - other chains have different RPC endpoints you'll have to input here if contract is not on Ethereum mainnet
-
-  const CHAINID = 137; //change to 5 to test on goerli
-  
-  {/* make sure to update for your contract address; if you created your contract through the HQ, you can grab its address off the Success or Admin page */}
-  const CONTRACT_ADDRESS = '0xC6FeCF72687baA1dC1584d0Af26227858895D38c';
-
+const Home: NextPage = (props: any) => {
   const [creditCard, setCreditCard] = useState(true);
-  // for batch minting
   const [mintQuantity, setMintQuantity] = useState(1);
-
-  const [contractData, setContractData] = useState<any>([{}]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadData(){
-      let data = await getReleaseDetails(CHAINID, CONTRACT_ADDRESS);
-      setContractData(data);
-      setLoading(false);
-    }
-    loadData();
-  }, []);
-
-  console.log("test",loading)
 
   return (
     <div className={`${styles.container} background`}>
     <Head>
-      <title>Mint J Dilla Anthology</title>
+      <title>Mint NFTs</title>
       <meta
         name="description"
-        content='Custom mint site by decent.xyz for fans to mint NFTs from the J Dilla collection.'
+        content='Minting page starter repository for Polygon NFTs by decent.xyz.'
       />
       <link rel="icon" href="/images/dilla-picture.png" />
     </Head>
@@ -55,10 +31,10 @@ const Home: NextPage = () => {
             {`Showing how easy it is to setup a custom mint site with Decent.`}
           </div>
           <div className='px-10 w-72 space-y-1 p-2 border border-white rounded-md'>
-            <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>0.002 ETH</p></div>
+            <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>{props.contractData.data.tokenPrice} MATIC</p></div>
             <div className='grid grid-cols-2'>
               <p>Minted:</p>
-              <p className='text-right'>{loading ? "..." : (contractData?.data?.totalSupply / (contractData?.data?.MAX_TOKENS > 99999999 ? "Open" : contractData?.data?.MAX_TOKENS))}</p>
+              <p className='text-right'>{props.contractData.data.totalSupply} / {props.contractData.data.MAX_TOKENS > 99999999 ? "Open" : props.contractData.data.MAX_TOKENS}</p>
             </div>
           </div>
         </div>
@@ -69,11 +45,20 @@ const Home: NextPage = () => {
               <div style={{ height: "100%", width: "100%" }}>
                 <Image className="rounded-lg drop-shadow-lg" src="/images/gradient-logo.png" object-fit="contain" fill alt={'nft'} />
               </div>
-              <MintButton chainId={CHAINID} contractAddress={CONTRACT_ADDRESS} price={parseInt(contractData?.data?.price)} setQuantity={setMintQuantity} quantity={mintQuantity} decentLink={'https://hq.decent.xyz/137/Editions/0xC6FeCF72687baA1dC1584d0Af26227858895D38c'} state={creditCard} clientId={process.env.NEXT_PUBLIC_GOLDEN_HOUR_CLIENTID} />
+            <MintButton 
+              chainId={props.contractData.chainId} 
+              contractAddress={props.contractData.address} 
+              price={parseFloat(props.contractData.data.tokenPrice)} 
+              setQuantity={setMintQuantity} 
+              quantity={mintQuantity} 
+              decentLink={'https://hq.decent.xyz/137/Editions/0xC6FeCF72687baA1dC1584d0Af26227858895D38c'} 
+              state={creditCard} 
+              clientId={process.env.NEXT_PUBLIC_GOLDEN_HOUR_CLIENTID} 
+            />
             <Toggle state={creditCard} setState={setCreditCard} />
           </div>
         </div>
-      </div>
+        </div>
       </div>
     </main>
 
@@ -88,3 +73,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const CHAINID = 137;
+  const CONTRACT_ADDRESS = '0xC6FeCF72687baA1dC1584d0Af26227858895D38c';
+  let contractData = await getReleaseDetails(CHAINID, CONTRACT_ADDRESS)
+  return {
+    props: {
+      contractData
+    },
+  };
+};

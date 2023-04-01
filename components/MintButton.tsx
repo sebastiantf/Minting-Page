@@ -7,13 +7,14 @@ import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
+import { useSigner, useAccount, useNetwork } from 'wagmi';
 
 const MintButton = (props:any) => {
   const { ready, authenticated, linkWallet } = usePrivy();
+  const { data: signer } = useSigner();
+  const { address: account } = useAccount();
+  const { chain: activeChain } = useNetwork();
   const [isMinting, setIsMinting] = useState(false);
-
-  const provider = authenticated && new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider ? provider.getSigner() : null;
 
   const onSigning = (isMinting:boolean) => {
     setIsMinting(isMinting || false);
@@ -30,13 +31,17 @@ const MintButton = (props:any) => {
   }
 
   const mint = async () => {
+    if (activeChain?.id !== 137) {
+      toast.error("Please switch to Polygon network to continue.");
+      return;
+    }
     if (signer) {
       try {
         onSigning?.(true);
-        const sdk = new DecentSDK(props.chainId, signer as any);
+        const sdk = new DecentSDK(props.chainId, signer);
         const price:number = props.price * props.quantity;
         const nftOne = await edition.getContract(sdk, props.contractAddress);
-        const tx = await nftOne.mint(props.quantity, { value: ethers.utils.parseEther(price.toString()) });
+        const tx = await nftOne.mint(account, props.quantity, { value: ethers.utils.parseEther(price.toString()) });
         const receipt = await tx.wait();
         await onSuccessfulMint(receipt);
       } catch (error) {
