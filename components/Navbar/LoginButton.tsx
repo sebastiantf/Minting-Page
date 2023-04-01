@@ -43,7 +43,7 @@ const LoginButton = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-violet-700 ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black shadow-lg ring-1 ring-violet-700 ring-opacity-5 focus:outline-none">
               <div className="py-1">
               {user?.email ? 
                   <Menu.Item>
@@ -86,7 +86,7 @@ const LoginButton = () => {
           </Menu> :
           <button
             onClick={login}
-            className='bg-white text-violet-700 hover:bg-white hover:bg-opacity-80 px-5 py-1 rounded-full font-[500]'
+            className='bg-black text-violet-700 hover:bg-white hover:bg-opacity-80 px-5 py-1 rounded-full font-[500]'
         >
             Connect Wallet
           </button>

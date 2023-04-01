@@ -7,20 +7,21 @@ import MintButton from "../components/MintButton";
 import Link from 'next/link';
 import Toggle from '../components/Toggle';
 import { getReleaseDetails } from '../lib/getReleaseDetails';
+import getIpfsLink from "../lib/getIpfsLink";
 
 const Home: NextPage = (props: any) => {
   const [creditCard, setCreditCard] = useState(true);
   const [mintQuantity, setMintQuantity] = useState(1);
 
   return (
-    <div className={`${styles.container} background`}>
+    <div className={`${styles.container}`}>
     <Head>
-      <title>Mint NFTs</title>
+      <title>{props.contractData.data.name}</title>
       <meta
         name="description"
-        content='Minting page starter repository for Polygon NFTs by decent.xyz.'
+        content={`${props.contractData.metadata.description}`}
       />
-      <link rel="icon" href="/images/dilla-picture.png" />
+      <link rel="icon" href={getIpfsLink(props.contractData.metadata.image)} />
     </Head>
 
     <main className={`${styles.main} lg:mx-20 sm:mx-10 xs:mx-2`}>
@@ -43,7 +44,9 @@ const Home: NextPage = (props: any) => {
           <div className='text-center space-y-3 w-96'>
             <div className='h-96 relative'>
               <div style={{ height: "100%", width: "100%" }}>
-                <Image className="rounded-lg drop-shadow-lg" src="/images/gradient-logo.png" object-fit="contain" fill alt={'nft'} />
+                <Image className="rounded-lg drop-shadow-lg" src={getIpfsLink(props.contractData.metadata.image)} object-fit="contain" fill alt={'nft'} />
+              </div>
+              {!!props.contractData.metadata.animation_url && <audio className='absolute absolute bottom-2 left-1/2 transform -translate-x-1/2 h-8' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
               </div>
             <MintButton 
               chainId={props.contractData.chainId} 
@@ -56,16 +59,15 @@ const Home: NextPage = (props: any) => {
               clientId={process.env.NEXT_PUBLIC_GOLDEN_HOUR_CLIENTID} 
             />
             <Toggle state={creditCard} setState={setCreditCard} />
-          </div>
+          
         </div>
         </div>
       </div>
     </main>
 
-    <footer className='py-8 border-t border-white text-white justify-center flex items-center'>
-     <p className='pr-2 tracking-widest text-sm font-[400]'>Powered by </p>
+    <footer className='py-8 border-t border-black justify-center flex items-center'>
      <Link href="http://decent.xyz/" className='pt-1'>
-        <Image src='/images/decent.png' height={12} width={85} alt='Decent 💪' />
+        <Image src='https://nftstorage.link/ipfs/QmNcj6YK5qUBH3w4KVHviGQ7EJV4sM6FnLZvNrpPzawUfo' height={60} width={180} alt='Decent 💪' />
       </Link>
     </footer>
   </div>
