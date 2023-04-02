@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter-Tight:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter Tight', sans-serif;
+  @apply tracking-widest
 }
 
 a {
@@ -36,22 +35,22 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 16px 16px;
-  background: #FFFFFF;
+  background: #000000;
 
   box-shadow: 0px 10px 20px 5px rgba(218, 217, 227, 0.31);
-  border-radius: 12px;
+  border-radius: 4px;
 
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #000000;
+  color: #ffffff;
 }
 
-::-moz-selection { background-color: #F1E7FC; 
-  color: #730FE6; } 
-  ::selection { background-color: #F1E7FC; 
-  color: #730FE6; }
+::-moz-selection { background-color: #000000; 
+  color: #ffffff; } 
+  ::selection { background-color: #000000; 
+  color: #ffffff; }
 
   button.xmint-btn {
     background-color: rgb(255, 255, 255);
@@ -59,13 +58,13 @@ h1 {
 
   button.xmint-btn span {
     display: none;
-    color: #730FE6;
+    color: #000000;
     font-size: small;
   }
 
   button.xmint-btn:after {
     content: "Purchase";
-    color: #730FE6;
+    color: #000000;
     padding-right: 8px;
 }
 

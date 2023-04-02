@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center`} >
+      <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center border-b border-gray`} >
         <NavItem href="https://decent.xyz" openInNewTab><Image width={100} height={30} src="https://nftstorage.link/ipfs/QmNcj6YK5qUBH3w4KVHviGQ7EJV4sM6FnLZvNrpPzawUfo" alt="decent" /></NavItem>
         <div className="flex items-center gap-4">
           <LoginButton />

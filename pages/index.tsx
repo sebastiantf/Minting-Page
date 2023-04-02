@@ -65,9 +65,11 @@ const Home: NextPage = (props: any) => {
       </div>
     </main>
 
-    <footer className='py-8 border-t border-black justify-center flex items-center'>
-     <Link href="http://decent.xyz/" className='pt-1'>
-        <Image src='https://nftstorage.link/ipfs/QmNcj6YK5qUBH3w4KVHviGQ7EJV4sM6FnLZvNrpPzawUfo' height={60} width={180} alt='Decent 💪' />
+    {/* would appreciate the footer s/o but do what you will 🤝 */}
+    <footer className='py-4 border-t border-black justify-center flex items-center'>
+      <p className='pr-2 tracking-widest text-sm font-[400]'>Powered by </p>
+      <Link href="http://decent.xyz/" className='pt-1'>
+        <Image src='/images/decent.png' height={12} width={85} alt='Decent 💪' />
       </Link>
     </footer>
   </div>

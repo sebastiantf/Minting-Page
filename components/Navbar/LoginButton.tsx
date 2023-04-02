@@ -14,7 +14,7 @@ const LoginButton = () => {
     const displayInfo = (address: string) => {
       return <>
          <div className='flex items-center'> 
-           <BsDot className='text-green-500 text-3xl pt-1' />
+           <BsDot className='text-violet-500 text-4xl' />
           {user?.email?.address ? user?.email?.address : (user?.twitter?.username ? user?.twitter?.username : address.substring(0, 6) + '...' + address.substring(address.length - 4))}
           </div>
       </>
@@ -29,7 +29,7 @@ const LoginButton = () => {
           {authenticated ?
           <Menu as="div" className="relative inline-block text-left">
             <div>
-              <Menu.Button className="flex items-center text-white hover:text-gray-100 active:text-white tracking-widest cursor-pointer">
+              <Menu.Button className="flex items-center hover:opactiy-80 tracking-widest cursor-pointer">
               {displayInfo(user?.wallet?.address as string)}
               <EllipsisVerticalIcon className="h-6 w-6" aria-hidden="true" />
               </Menu.Button>
@@ -43,7 +43,7 @@ const LoginButton = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black shadow-lg ring-1 ring-violet-700 ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white border border-black rounded-sm shadow-lg">
               <div className="py-1">
               {user?.email ? 
                   <Menu.Item>
@@ -74,7 +74,7 @@ const LoginButton = () => {
                 }
                 <Menu.Item>
                   <p
-                      className='block px-4 py-2 cursor-pointer text-sm active:text-violet-900 font-[500]'
+                      className='block px-4 py-2 cursor-pointer text-sm active:text-black font-[500]'
                       onClick={logout}
                   >
                       Logout
@@ -86,7 +86,7 @@ const LoginButton = () => {
           </Menu> :
           <button
             onClick={login}
-            className='bg-black text-violet-700 hover:bg-white hover:bg-opacity-80 px-5 py-1 rounded-full font-[500]'
+            className='bg-black text-white hover:bg-opacity-80 hover:bg-opacity-80 px-5 py-1 rounded-full font-[500]'
         >
             Connect Wallet
           </button>
