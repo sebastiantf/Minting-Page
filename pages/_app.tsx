@@ -26,7 +26,7 @@ const configureChainsConfig = configureChains(
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}>
+    <PrivyProvider appId='cldom121l0000mq08moy30qbl'>
       <PrivyWagmiConnector wagmiChainsConfig={configureChainsConfig}>
         <ToastContainer />
         <Analytics />
