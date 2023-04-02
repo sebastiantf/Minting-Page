@@ -27,10 +27,10 @@ const Home: NextPage = (props: any) => {
       <div className='grid md:grid-cols-2 place-items-center w-full mt-[10vh] sm:mt-0'>
         <div className='md:border-r border-black h-[80vh] w-full'>
           <h1 className='text-7xl max-h-[20vh] p-8 flex-items-center border-b border-black'>{props.contractData.data.name}</h1>
-          <div className='font-[300] p-8 max-h-[50vh] overflow-y-scroll sm:border-b border-black'>
+          <div className='font-[300] p-8 max-h-[50vh] overflow-y-scroll sm:border-b border-black text-sm'>
             {props.contractData.metadata.description}
           </div>
-          <div className='p-8 h-[10vh] sm:border-none border-y border-black'>
+          <div className='px-8 py-4 h-[10vh] sm:border-none border-y border-black'>
             <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>{props.contractData.data.tokenPrice} MATIC</p></div>
             <div className='grid grid-cols-2'>
               <p>Minted:</p>
