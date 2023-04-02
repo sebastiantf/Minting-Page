@@ -1,64 +1,39 @@
 import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app';
-import { RainbowKitProvider, getDefaultWallets, darkTheme } from '@rainbow-me/rainbowkit';
-import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+import { PrivyProvider } from '@privy-io/react-auth';
 import Navbar from '../components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from "@vercel/analytics/react";
-
-//make sure you are including the correct chain for your contract here in the rainbowkit config
-const { chains, provider, webSocketProvider } = configureChains(
+import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
+import { configureChains } from 'wagmi';
+import { polygon } from "wagmi/chains";
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+ 
+const configureChainsConfig = configureChains(
   [
-    chain.mainnet,
-    chain.goerli,
-    // chain.polygon,
-    // chain.optimism,
-    // chain.arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "false"
-      ? []
-      : []),
+    polygon,
   ],
   [
     alchemyProvider({
-      apiKey: '0jEGdrOL9bPX8YEcylQIuYm6cgObvmHo',
+      apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
       priority: 0,
     }),
     publicProvider({ priority: 1 }),
   ]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: 'Decent Minting Page',
-  chains,
-});
-
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-  webSocketProvider,
-});
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider theme={darkTheme({
-            accentColor: '#9969FF',
-            accentColorForeground: 'white',
-            borderRadius: 'small',
-            fontStack: 'system',
-            overlayBlur: 'small',
-          })} chains={chains} showRecentTransactions={true}>
+    <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}>
+      <PrivyWagmiConnector wagmiChainsConfig={configureChainsConfig}>
         <ToastContainer />
         <Analytics />
         <Navbar />
         <Component {...pageProps} />
-      </RainbowKitProvider>
-    </WagmiConfig>
+      </PrivyWagmiConnector>
+    </PrivyProvider>
   );
 }
 

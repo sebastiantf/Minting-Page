@@ -1,93 +1,87 @@
 import type { NextPage } from 'next';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import MintButton from "../components/MintButton";
 import Link from 'next/link';
-import { DecentSDK, edition } from "@decent.xyz/sdk";
-import { ethers } from "ethers";
-import MarketplaceButtons from '../components/MarketplaceButtons';
+import Toggle from '../components/Toggle';
+import { getReleaseDetails } from '../lib/getReleaseDetails';
+import getIpfsLink from "../lib/getIpfsLink";
 
-const Home: NextPage = () => {
-  const RPC = "https://ethereum-goerli-rpc.allthatnode.com"; //for testing on Ethereum goerli; do not need for mainnet - other chains have different RPC endpoints you'll have to input here if contract is not on Ethereum mainnet
-
-  const CHAINID = 5; //change to 5 to test on goerli
-  
-  {/* make sure to update for your contract address; if you created your contract through the HQ, you can grab its address off the Success or Admin page */}
-  const contractAddress = '0x2A1583aA340Ef05E857384108BDEd279beb2fDdB';
-  {/* can be deleted if only using 1 contract */}
-
-  const [contractMints, setContractMints] = useState(0);
-  
-  // required to display the mint counts you'll see below || can add any other contract data via a similar method
-  const updateContractInfo = async () => {
-    const provider = ethers.getDefaultProvider(RPC); //add RPC as parameter for goerli
-    const sdk = new DecentSDK(CHAINID, provider);
-    const contract = await edition.getContract(sdk, contractAddress);
-
-    setContractMints(parseInt(await contract.totalSupply()));
-  }
-
-  // for batch minting
+const Home: NextPage = (props: any) => {
+  const [creditCard, setCreditCard] = useState(true);
   const [mintQuantity, setMintQuantity] = useState(1);
 
-  // const openseaLink:string = "j-dilla-anthology";
+  return <>
+    <Head>
+      <title>{props.contractData.data.name}</title>
+      <meta
+        name="description"
+        content={props.contractData.metadata.description}
+      />
+      <link rel="icon" href={getIpfsLink(props.contractData.metadata.image)} />
+    </Head>
 
-  useEffect(() => {
-    updateContractInfo();
-  }, []);
-
-  return (
-    <div className={`${styles.container} background`}>
-      {/* set metadata; reminder to also clear out the Burble images from public/images */}
-      <Head>
-        <title>Mint Decent</title>
-        <meta
-          name="description"
-          content='Custom mint site by decent.xyz for creators to easily deploy extermely customizable minting sites.'
-        />
-        <link rel="icon" href="/images/decent-icon.png" />
-      </Head>
-
-      <main className={`${styles.main}`}>
-        <div className='lg:flex items-start lg:gap-20 gap-12 lg:mt-20 mt-12'>
-          {/* make sure to update the images, contract information & most importantly (!) mint button props in the section below */}
-          {/* in most cases, you will likely only have 1 contract that needs minting so just use the first container and delete the next two */}
-          <div className='lg:max-w-1/2 w-full lg:mx-20'>
-            <h1 className={`${styles.title} font-[600]`}>Custom Mint Tutorial</h1>
-            <div className={`${styles.description} font-[300]`}>
-              {`Showing how easy it is to setup a custom mint site with Decent.`}
-            </div>
-            <div className='px-10 w-72 space-y-1 p-2 border border-white rounded-md'>
-              <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>0.002 ETH</p></div>
-              <div className='grid grid-cols-2'><p>Minted:</p><p className='text-right'>{contractMints} / 10</p></div>
-            </div>
+    <main className={`${styles.main}`}>
+      <div className='grid md:grid-cols-2 place-items-center w-full mt-[10vh] sm:mt-0'>
+        <div className='md:border-r border-black h-[80vh] w-full'>
+          <h1 className='text-7xl max-h-[20vh] p-8 flex-items-center border-b border-black'>{props.contractData.data.name}</h1>
+          <div className='font-[300] p-8 max-h-[50vh] overflow-y-scroll sm:border-b border-black'>
+            {props.contractData.metadata.description}
           </div>
-
-          <div className='flex w-full justify-center mt-12 lg:mt-0'>
-            <div className='text-center space-y-3 w-96'>
-              <div className='h-96 relative'>
-                <div style={{ height: "100%", width: "100%" }}>
-                  <Image className="rounded-lg drop-shadow-lg" src="/images/gradient-logo.png" object-fit="contain" fill alt={'nft'} />
-                </div>
-              </div>
-              <MintButton chainId={CHAINID} contractAddress={contractAddress} price={.002} setQuantity={setMintQuantity} quantity={mintQuantity} />
-              <MarketplaceButtons contractAddress={contractAddress} />
+          <div className='p-8 h-[10vh] sm:border-none border-y border-black'>
+            <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>{props.contractData.data.tokenPrice} MATIC</p></div>
+            <div className='grid grid-cols-2'>
+              <p>Minted:</p>
+              <p className='text-right'>{props.contractData.data.totalSupply} / {props.contractData.data.MAX_TOKENS > 99999999 ? "Open" : props.contractData.data.MAX_TOKENS}</p>
             </div>
           </div>
         </div>
-      </main>
+
+        <div className='sm:px-8 px-4 w-full flex items-center justify-center my-4 sm:my-0'>
+          <div className='space-y-3'>
+            <div className='h-[350px] w-[350px] relative'>
+              <div style={{ height: "100%", width: "100%" }}>
+                <Image className="drop-shadow-lg" src={getIpfsLink(props.contractData.metadata.image)} object-fit="contain" fill alt={'nft'} />
+              </div>
+              {!!props.contractData.metadata.animation_url && <audio className='absolute absolute bottom-2 left-1/2 transform -translate-x-1/2 h-8' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
+              </div>
+            <MintButton 
+              chainId={props.contractData.chainId} 
+              contractAddress={props.contractData.address} 
+              price={parseFloat(props.contractData.data.tokenPrice)} 
+              setQuantity={setMintQuantity} 
+              quantity={mintQuantity} 
+              decentLink={'https://hq.decent.xyz/137/Editions/0xC6FeCF72687baA1dC1584d0Af26227858895D38c'} 
+              state={creditCard} 
+              clientId={process.env.NEXT_PUBLIC_CROSSMINT_CLIENTID} 
+            />
+            <Toggle state={creditCard} setState={setCreditCard} />
+          </div>
+        </div>
+      </div>
 
       {/* would appreciate the footer s/o but do what you will 🤝 */}
-      <footer className='py-8 border-t border-white text-white justify-center flex items-center'>
-       <p className='pr-2 tracking-widest text-sm font-[400]'>Powered by </p>
-       <Link href="http://decent.xyz/" className='pt-1'>
+      <footer className='sm:fixed bottom-0 w-full h-[10vh] border-t border-black justify-center flex items-center bg-white'>
+        <p className='pr-2 tracking-widest text-sm font-[400]'>Powered by </p>
+        <Link href="http://decent.xyz/" className='pt-1'>
           <Image src='/images/decent.png' height={12} width={85} alt='Decent 💪' />
         </Link>
       </footer>
-    </div>
-  );
+    </main>
+  </>
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const CHAINID = 137;
+  const CONTRACT_ADDRESS = '0xC6FeCF72687baA1dC1584d0Af26227858895D38c';
+  let contractData = await getReleaseDetails(CHAINID, CONTRACT_ADDRESS)
+  return {
+    props: {
+      contractData
+    },
+  };
+};

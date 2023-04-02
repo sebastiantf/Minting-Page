@@ -1,13 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter-Tight:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter Tight', sans-serif;
+  @apply tracking-widest
 }
 
 a {
@@ -19,15 +18,8 @@ a {
   box-sizing: border-box;
 }
 
-.background {
-  background-color: #0a0f17;
-  background-image:
-      radial-gradient(farthest-side at -20% 30%, rgba(115, 15, 230, 0.7) 0, transparent 50%),
-      radial-gradient(farthest-corner at 120% 120%, rgba(115, 15, 230, 0.7) 0, transparent 40%);
-}
-
 h1 {
-  @apply text-3xl font-medium
+  @apply text-7xl font-medium
 }
 
 .diplay-wallet {
@@ -43,19 +35,36 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 16px 16px;
-  background: #FFFFFF;
+  background: #000000;
 
   box-shadow: 0px 10px 20px 5px rgba(218, 217, 227, 0.31);
-  border-radius: 12px;
+  border-radius: 4px;
 
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #000000;
+  color: #ffffff;
 }
 
-::-moz-selection { background-color: #F1E7FC; 
-  color: #730FE6; } 
-  ::selection { background-color: #F1E7FC; 
-  color: #730FE6; }
+::-moz-selection { background-color: #000000; 
+  color: #ffffff; } 
+  ::selection { background-color: #000000; 
+  color: #ffffff; }
+
+  button.xmint-btn {
+    background-color: rgb(0, 0, 0);
+  }
+
+  button.xmint-btn span {
+    display: none;
+    color: #ffffff;
+    font-size: small;
+  }
+
+  button.xmint-btn:after {
+    content: "Purchase";
+    color: #ffffff;
+    padding-right: 8px;
+}
+

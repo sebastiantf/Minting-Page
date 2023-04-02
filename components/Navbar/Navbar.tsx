@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Image from "next/image";
 import styles from "./navbar.module.css";
+import LoginButton from "./LoginButton";
 
 interface NavItemProps {
   href: string;
@@ -25,12 +25,14 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center`} >
-        <NavItem href="http://decent.xyz/" openInNewTab><Image width={100} height={40} src="/images/decent.png" alt="decent" /></NavItem>  
+      <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center border-b border-black drop-shadow-md`} >
+        <NavItem href="https://decent.xyz" openInNewTab><Image width={100} height={30} src="https://nftstorage.link/ipfs/QmNcj6YK5qUBH3w4KVHviGQ7EJV4sM6FnLZvNrpPzawUfo" alt="decent" /></NavItem>
         <div className="flex items-center gap-4">
-          <ConnectButton />
+          <LoginButton />
           <Link href='https://github.com/decentxyz/Minting-Page' target='_blank'>
-            <Image src='/images/github-mark-white.svg' height={20} width={20} alt='link to repository' />
+            <div className="p-1 rounded-full bg-black">
+              <Image src='/images/github-mark-white.svg' height={20} width={20} alt='link to repository' />
+            </div>
           </Link>
           </div>
       </nav>
