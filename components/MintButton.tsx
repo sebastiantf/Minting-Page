@@ -55,13 +55,13 @@ const MintButton = (props:any) => {
       }
     }
   }
-  return <div className="flex gap-4 py-2 items-center px-4 sm:px-0 justify-between mx-4">
+  return <div className="flex gap-4 py-2 items-center px-4 sm:px-0 justify-between mx-4 h-20">
     {props.state ?
       <>
         <CrossmintPayButton
           clientId={props.clientId}
           environment="production"
-          className="xmint-btn"
+          className="xmint-btn w-32"
           mintConfig={{
             type: "erc-721",
             totalPrice: (props.price * props.quantity).toString(),
@@ -69,7 +69,7 @@ const MintButton = (props:any) => {
           }}/>
       </>
       : <>
-      <button className="bg-white hover:bg-opacity-80 hover:drop-shadow-md text-indigo-700 px-5 py-1 rounded-full font-[600] w-full text-lg uppercase" onClick={mint}>{isMinting ? "..." : "Mint"}</button>
+      <button className="bg-black hover:bg-opacity-80 drop-shadow-md text-white px-5 py-1 rounded-full font-[500] w-32 text-lg" onClick={mint}>{isMinting ? "..." : "Purchase"}</button>
       </>
       }
       <NumberTicker quantity={props.quantity} setQuantity={props.setQuantity} />

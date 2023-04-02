@@ -4,7 +4,7 @@ import Link from "next/link";
 const MarketplaceButtons = (props:any) => {
 
   return ( 
-    <Link href={`https://opensea.io/collection/${props.decentLink}`} target="_blank" rel="noreferrer">
+    <Link href={props.decentLink} target="_blank" rel="noreferrer">
     <Image src="/images/decent-icon.png" height={36} width={36} alt="decent"/></Link>
   )
 }

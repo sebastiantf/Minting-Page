@@ -5,20 +5,21 @@ export default function Toggle(props:any) {
   return (
     <Switch.Group>
       <div className="flex items-center text-sm">
-        <Switch.Label className="mr-4 font-[500] italic">Pay with credit card?</Switch.Label>
+        <p className='w-[80px]'>Crypto</p>
         <Switch
           checked={props.state}
           onChange={props.setState}
-          className={`${
-            props.state ? 'bg-violet-400' : 'bg-gray-200'
-          } relative inline-flex h-4 w-8 items-center rounded-full transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-1`}
+          className={`border border-black ${
+            props.state ? 'bg-black' : 'bg-white'
+          } relative inline-flex h-2 w-[190px] items-center rounded-full`}
         >
           <span
             className={`${
-              props.state ? 'translate-x-4' : 'translate-x-1'
-            } inline-block h-3 w-3 transform rounded-full bg-white transition-transform`}
+              props.state ? 'translate-x-[176px] bg-white' : 'translate-x-1 bg-black'
+            } inline-block z-10 h-3 w-3 border border-black transform rounded-full transition-transform`}
           />
         </Switch>
+        <p className='w-[80px] text-right'>Credit Card</p>
       </div>
     </Switch.Group>
   )

@@ -19,7 +19,7 @@ a {
 }
 
 h1 {
-  @apply text-3xl font-medium
+  @apply text-7xl font-medium
 }
 
 .diplay-wallet {
@@ -53,18 +53,18 @@ h1 {
   color: #ffffff; }
 
   button.xmint-btn {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
   }
 
   button.xmint-btn span {
     display: none;
-    color: #000000;
+    color: #ffffff;
     font-size: small;
   }
 
   button.xmint-btn:after {
     content: "Purchase";
-    color: #000000;
+    color: #ffffff;
     padding-right: 8px;
 }
 
