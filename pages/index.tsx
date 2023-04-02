@@ -55,7 +55,7 @@ const Home: NextPage = (props: any) => {
               quantity={mintQuantity} 
               decentLink={'https://hq.decent.xyz/137/Editions/0xC6FeCF72687baA1dC1584d0Af26227858895D38c'} 
               state={creditCard} 
-              clientId={process.env.NEXT_PUBLIC_GOLDEN_HOUR_CLIENTID} 
+              clientId={process.env.NEXT_PUBLIC_CROSSMINT_CLIENTID} 
             />
             <Toggle state={creditCard} setState={setCreditCard} />
           </div>
