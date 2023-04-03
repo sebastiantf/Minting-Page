@@ -63,7 +63,7 @@ npm run dev
 
 ## Demo
 
-https://minting-page-sepia.vercel.app/
+https://minting-page-oaflffwo9-decent-webapp.vercel.app/
 
 ## Tech Stack
 
