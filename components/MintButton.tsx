@@ -30,7 +30,7 @@ const MintButton = (props:any) => {
   }
 
   const mint = async () => {
-    if (activeChain?.id !== 137) {
+    if (activeChain?.id !== props.activeChain) {
       toast.error("Please switch to Polygon network to continue.");
       return;
     }
