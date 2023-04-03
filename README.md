@@ -14,12 +14,14 @@ You will need to create a [Decent NFT](https://hq.decent.xyz/), [Decent API Key]
 
 1. Go to https://hq.decent.xyz/create/Editions and create a new NFT
 2. From the success page, copy the contract address and note the chain ID number.  You can deploy your NFT to Ethereum, Polygon, Arbitrum or Optimism.  These chains have the following IDs:
+
 | Chain       | ID Number   |
 | ----------- | ----------- |
 | Ethereum    | 1           |
 | Polygon     | 137         |
 | Arbitrum    | 42161       |
 | Optimism    | 10          |
+
 The example uses an NFT on Polygon.  On the `index.tsx` page, enter your NFT's chain ID and contract address in the `getServerSideProps` request + the `activeChain` property within the `<MintButton />` component.
 3. Request a [Decent API Key](https://docs.google.com/forms/d/e/1FAIpQLSdPBORZGU-JsMxwlhan9aUl01QCTgu2KJMEEPjhHC_9v1PQqA/viewform) and add it to your .env file.  Once inputted, your minting page will automatically populate with your NFT's data and metadata.  If you would like to add or swap information, please visit [Decent's API Documentation](https://docs.decent.xyz/reference/get_contracts-chainid-address) to query for your contract and view the JSON response to see the available information.
 4. [Skip to $5 if do not want credit cards] Visit the [Crossmint Developer Console](https://www.crossmint.com/console/overview), and select the "Enable credit card payments" option.
