@@ -34,7 +34,25 @@ Reach out to [@cdurbinxyz](https://twitter.com/cdurbinxyz) on Twitter if you run
 
 ## To Run
 
+First, install dependencies using npm:
 
+```bash
+npm i
+```
+
+Next, run `cp .env.example .env.local` to create your file to enter the information detailed above.  It should look like:
+
+```bash
+NEXT_PUBLIC_CROSSMINT_CLIENTID=<your-crossmint-client-id>
+NEXT_PUBLIC_DECENT_API_KEY=<your-decent-api-key>
+NEXT_PUBLIC_ALCHEMY_API_KEY=<your-alchemy-api-key>
+```
+
+Lastly, run the development server:
+
+```bash
+npm run dev
+```
 
 ## Demo
 
