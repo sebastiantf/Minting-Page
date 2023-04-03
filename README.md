@@ -6,7 +6,7 @@ A custom minting page starter repo built on [Next.js](https://nextjs.org/), [Tai
 
 The purpose of this repository is to get you up & running quickly with a custom NFT minting page.  **Notably, this repository enables purchasing NFTs with either crypto or credit cards.**  The primary functionality demonstrated in this repo is the ability to mint NFTs from Decent's [Editions](https://docs.decent.xyz/docs/editions) & [Rentable](https://docs.decent.xyz/docs/rentable) contracts.
 
-For a video tutorial on how to get up and running in <10min, please check out the [Decent YouTube channel](https://www.youtube.com/watch?v=s72S5_5HWAk).
+For a video tutorial on how to get up and running in ~10min, please check out the [YouTube demo](https://youtu.be/5_WbP9bjPKU).
 
 ## Deployment Instructions
 
