@@ -13,6 +13,7 @@ For a video tutorial on how to get up and running in <10min, please check out th
 You will need to create a [Decent NFT](https://hq.decent.xyz/), [Decent API Key](https://docs.google.com/forms/d/e/1FAIpQLSdPBORZGU-JsMxwlhan9aUl01QCTgu2KJMEEPjhHC_9v1PQqA/viewform), [Crossmint Client ID](https://www.crossmint.com/console/overview), and [Alchemy API Key](https://www.alchemy.com/) to use this starter. Here are the steps:
 
 1. Go to https://hq.decent.xyz/create/Editions and create a new NFT
+
 2. From the success page, copy the contract address and note the chain ID number.  You can deploy your NFT to Ethereum, Polygon, Arbitrum or Optimism.  These chains have the following IDs:
 
 | Chain       | ID Number   |
@@ -23,11 +24,17 @@ You will need to create a [Decent NFT](https://hq.decent.xyz/), [Decent API Key]
 | Optimism    | 10          |
 
 The example uses an NFT on Polygon.  On the `index.tsx` page, enter your NFT's chain ID and contract address in the `getServerSideProps` request + the `activeChain` property within the `<MintButton />` component.
+
 3. Request a [Decent API Key](https://docs.google.com/forms/d/e/1FAIpQLSdPBORZGU-JsMxwlhan9aUl01QCTgu2KJMEEPjhHC_9v1PQqA/viewform) and add it to your .env file.  Once inputted, your minting page will automatically populate with your NFT's data and metadata.  If you would like to add or swap information, please visit [Decent's API Documentation](https://docs.decent.xyz/reference/get_contracts-chainid-address) to query for your contract and view the JSON response to see the available information.
+
 4. [Skip to $5 if do not want credit cards] Visit the [Crossmint Developer Console](https://www.crossmint.com/console/overview), and select the "Enable credit card payments" option.
+
 5. Click on "Register a new collection" and follow the form's steps.  Crossmint will automatically populate the ABI for all Decent contracts, so you should not have to worry about that step.  Enter the client ID you receive as your .env file to enable credit card payments.
+
 6. Create an Alchemy account and visit [your dashboard](https://dashboard.alchemy.com/) to create an Alchemy API key. Alchemy facilitates the connection between your application and the chain of your choice.
+
 7. If your NFT is not on Polygon, visit the `_app.tsx` file and update the chain config for the chain of your choice.
+
 8. (Optional) Create your own [Privy application id](http://privy.io/) and enter it on the `_app.tsx` file here: `http://privy.io/`.  Ok to just use Decent's default appId as well.
 
 Reach out to [@cdurbinxyz](https://twitter.com/cdurbinxyz) on Twitter if you run into any issues.
