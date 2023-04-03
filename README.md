@@ -27,7 +27,7 @@ The example uses an NFT on Polygon.  On the `index.tsx` page, enter your NFT's c
 
 3. Request a [Decent API Key](https://docs.google.com/forms/d/e/1FAIpQLSdPBORZGU-JsMxwlhan9aUl01QCTgu2KJMEEPjhHC_9v1PQqA/viewform) and add it to your .env file.  Once inputted, your minting page will automatically populate with your NFT's data and metadata.  If you would like to add or swap information, please visit [Decent's API Documentation](https://docs.decent.xyz/reference/get_contracts-chainid-address) to query for your contract and view the JSON response to see the available information.
 
-4. [Skip to $5 if do not want credit cards] Visit the [Crossmint Developer Console](https://www.crossmint.com/console/overview), and select the "Enable credit card payments" option.
+4. (Skip to #5 if do not want credit cards) Visit the [Crossmint Developer Console](https://www.crossmint.com/console/overview), and select the "Enable credit card payments" option.
 
 5. Click on "Register a new collection" and follow the form's steps.  Crossmint will automatically populate the ABI for all Decent contracts, so you should not have to worry about that step.  Enter the client ID you receive as your .env file to enable credit card payments.
 
