@@ -28,8 +28,13 @@ The example uses an NFT on Polygon.  On the `index.tsx` page, enter your NFT's c
 5. Click on "Register a new collection" and follow the form's steps.  Crossmint will automatically populate the ABI for all Decent contracts, so you should not have to worry about that step.  Enter the client ID you receive as your .env file to enable credit card payments.
 6. Create an Alchemy account and visit [your dashboard](https://dashboard.alchemy.com/) to create an Alchemy API key. Alchemy facilitates the connection between your application and the chain of your choice.
 7. If your NFT is not on Polygon, visit the `_app.tsx` file and update the chain config for the chain of your choice.
+8. (Optional) Create your own [Privy application id](http://privy.io/) and enter it on the `_app.tsx` file here: `http://privy.io/`.  Ok to just use Decent's default appId as well.
 
 Reach out to [@cdurbinxyz](https://twitter.com/cdurbinxyz) on Twitter if you run into any issues.
+
+## To Run
+
+
 
 ## Demo
 
