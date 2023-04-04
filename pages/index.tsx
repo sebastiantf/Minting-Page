@@ -76,7 +76,7 @@ const Home: NextPage = (props: any) => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const CHAINID = 137;
   const CONTRACT_ADDRESS = '0xC6FeCF72687baA1dC1584d0Af26227858895D38c';
   let contractData = await getReleaseDetails(CHAINID, CONTRACT_ADDRESS)
@@ -84,5 +84,6 @@ export async function getServerSideProps() {
     props: {
       contractData
     },
+    revalidate: 20
   };
 };
