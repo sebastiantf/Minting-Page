@@ -1,6 +1,6 @@
 # Minting Page Starter – Decent NFTs
 
-A custom minting page starter repo built on [Next.js](https://nextjs.org/), [Tailwind](https://tailwindcss.com/docs/customizing-colors), and [Decent](http://decent.xyz/), deployed on [Vercel](https://vercel.com/).
+Custom NFT minting page starter repo built on [Next.js](https://nextjs.org/), [Tailwind](https://tailwindcss.com/docs/customizing-colors), and [Decent](http://decent.xyz/), deployed on [Vercel](https://vercel.com/).
 
 ![](/public/images/example.png)
 
