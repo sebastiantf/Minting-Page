@@ -7,13 +7,14 @@ import handleTxError from "../lib/handleTxError";
 import NumberTicker from "./NumberTicker";
 import MarketplaceButtons from "./MarketplaceButtons";
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
-import { useSigner, useAccount, useNetwork } from 'wagmi';
+import { useSigner, useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 
 const MintButton = (props:any) => {
   const { ready, authenticated, linkWallet } = usePrivy();
   const { data: signer } = useSigner();
   const { address: account } = useAccount();
   const { chain: activeChain } = useNetwork();
+  const { switchNetwork } = useSwitchNetwork();
   const [isMinting, setIsMinting] = useState(false);
 
   const onSigning = (isMinting:boolean) => {
