@@ -42,6 +42,7 @@ const GaslessMintButton = (props: any) => {
   }
 
   const mint = async () => {
+    console.log(activeChain?.id, props.activeChain)
     if (activeChain?.id !== props.activeChain) {
       toast.error("Please switch to Polygon network to continue.");
       return;
