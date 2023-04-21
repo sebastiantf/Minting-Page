@@ -39,6 +39,18 @@ The example uses an NFT on Polygon.  On the `index.tsx` page, enter your NFT's c
 
 Reach out to [@cdurbinxyz](https://twitter.com/cdurbinxyz) on Twitter if you run into any issues.
 
+## Gasless Mint for free NFTs
+
+1. Create a brand new Metamask wallet and export the private key, use these [instructions](https://support.metamask.io/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key)
+
+2. Add the private key to the NEXT_PUBLIC_GAS_WALLET_KEY env.
+
+3. Fill the wallet with native token on Polygon -> MATIC, on Eth -> ETH, etc. Send a safe amount to the wallet, this will be processing all the txns. If gas runs out your users wont be able to mint!
+
+4. Swap the <MintButton> component for <GaslessMintButton> in index.tsx.
+
+5. Mint! No txns or pop-ups for your users!
+
 ## To Run
 
 First, install dependencies using npm:
@@ -53,6 +65,7 @@ Next, run `cp .env.example .env.local` to create your file to enter the informat
 NEXT_PUBLIC_CROSSMINT_CLIENTID=<your-crossmint-client-id>
 NEXT_PUBLIC_DECENT_API_KEY=<your-decent-api-key>
 NEXT_PUBLIC_ALCHEMY_API_KEY=<your-alchemy-api-key>
+NEXT_PUBLIC_GAS_WALLET_KEY=<your-gas-wallet-key>
 ```
 
 Lastly, run the development server:
