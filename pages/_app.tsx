@@ -7,13 +7,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from "@vercel/analytics/react";
 import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
 import { configureChains } from 'wagmi';
-import { polygon } from "wagmi/chains";
+import { optimismGoerli, polygon } from "wagmi/chains";
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
  
 const configureChainsConfig = configureChains(
   [
     polygon,
+    optimismGoerli
   ],
   [
     alchemyProvider({

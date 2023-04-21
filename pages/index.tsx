@@ -4,6 +4,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
 import MintButton from "../components/MintButton";
+import GaslessMintButton from '../components/GaslessMintButton';
 import Link from 'next/link';
 import Toggle from '../components/Toggle';
 import { getReleaseDetails } from '../lib/getReleaseDetails';
@@ -26,7 +27,7 @@ const Home: NextPage = (props: any) => {
     <main className={`${styles.main}`}>
       <div className='grid md:grid-cols-2 place-items-center w-full mt-[10vh] sm:mt-0'>
         <div className='md:h-[80vh] md:border-r border-black w-full'>
-          <h1 className='text-7xl p-8 flex-items-center border-b border-black'>{props.contractData.data.name}</h1>
+          <h1 className='p-8 border-b border-black text-7xl flex-items-center'>{props.contractData.data.name}</h1>
           <div className='font-[300] p-8 max-h-[50vh] overflow-y-scroll sm:border-b border-black text-sm'>
             {props.contractData.metadata.description}
           </div>
@@ -39,14 +40,15 @@ const Home: NextPage = (props: any) => {
           </div>
         </div>
 
-        <div className='sm:px-8 px-4 w-full flex items-center justify-center my-4 sm:my-0'>
+        <div className='flex items-center justify-center w-full px-4 my-4 sm:px-8 sm:my-0'>
           <div className='space-y-3'>
             <div className='h-[350px] w-[350px] relative'>
               <div style={{ height: "100%", width: "100%" }}>
                 <Image className="drop-shadow-lg" src={getIpfsLink(props.contractData.metadata.image)} object-fit="contain" fill alt={'nft'} />
               </div>
-              {!!props.contractData.metadata.animation_url && <audio className='absolute absolute bottom-2 left-1/2 transform -translate-x-1/2 h-8' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
+              {!!props.contractData.metadata.animation_url && <audio className='absolute h-8 transform -translate-x-1/2 bottom-2 left-1/2' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
               </div>
+              {/* Change to GaslessMintButton for free NFTs */}
             <MintButton 
               chainId={props.contractData.chainId} 
               contractAddress={props.contractData.address} 
