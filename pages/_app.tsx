@@ -18,7 +18,7 @@ const configureChainsConfig = configureChains(
   ],
   [
     alchemyProvider({
-      apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
+      apiKey: `${process.env.ALCHEMY_API_KEY}`,
       priority: 0,
     }),
     publicProvider({ priority: 1 }),
@@ -27,7 +27,7 @@ const configureChainsConfig = configureChains(
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <PrivyProvider appId='cldom121l0000mq08moy30qbl'>
+    <PrivyProvider appId={process.env.PRIVY_APP_ID as string}>
       <PrivyWagmiConnector wagmiChainsConfig={configureChainsConfig}>
         <ToastContainer />
         <Analytics />
