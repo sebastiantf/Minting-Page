@@ -3,15 +3,12 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
-import MintButton from "../components/MintButton";
-import GaslessMintButton from '../components/GaslessMintButton';
 import Link from 'next/link';
-import Toggle from '../components/Toggle';
 import { getReleaseDetails } from '../lib/getReleaseDetails';
 import getIpfsLink from "../lib/getIpfsLink";
+import Box from '../components/Box';
 
 const Home: NextPage = (props: any) => {
-  const [creditCard, setCreditCard] = useState(true);
   const [mintQuantity, setMintQuantity] = useState(1);
 
   return <>
@@ -49,18 +46,13 @@ const Home: NextPage = (props: any) => {
               {!!props.contractData.metadata.animation_url && <audio className='absolute h-8 transform -translate-x-1/2 bottom-2 left-1/2' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
               </div>
               {/* Change to GaslessMintButton for free NFTs */}
-            <MintButton 
+            <Box
+              className=''
               chainId={props.contractData.chainId} 
-              contractAddress={props.contractData.address} 
-              price={parseFloat(props.contractData.data.tokenPrice)} 
-              setQuantity={setMintQuantity} 
+              address={props.contractData.address} 
+              price={props.contractData.data.tokenPrice} 
               quantity={mintQuantity} 
-              decentLink={'https://hq.decent.xyz/137/Editions/0xC6FeCF72687baA1dC1584d0Af26227858895D38c'} 
-              state={creditCard} 
-              clientId={process.env.NEXT_PUBLIC_CROSSMINT_CLIENTID}
-              activeChain={137}
             />
-            <Toggle state={creditCard} setState={setCreditCard} />
           </div>
         </div>
       </div>
@@ -79,8 +71,8 @@ const Home: NextPage = (props: any) => {
 export default Home;
 
 export async function getStaticProps() {
-  const CHAINID = 137;
-  const CONTRACT_ADDRESS = '0xC6FeCF72687baA1dC1584d0Af26227858895D38c';
+  const CHAINID = 10;
+  const CONTRACT_ADDRESS = '0xfd22bFE1bc51E21FD5E212680E22FA2503FEE6C8';
   let contractData = await getReleaseDetails(CHAINID, CONTRACT_ADDRESS)
   return {
     props: {

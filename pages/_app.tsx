@@ -1,20 +1,23 @@
+import "@decent.xyz/the-box/dist/the-box-base.css"; 
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { PrivyProvider } from '@privy-io/react-auth';
 import Navbar from '../components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Analytics } from "@vercel/analytics/react";
-import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
-import { configureChains } from 'wagmi';
-import { optimismGoerli, polygon } from "wagmi/chains";
+import { configureChains, WagmiConfig, createClient } from 'wagmi';
+import { arbitrum, optimism, mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
+import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { WalletProvider } from "../lib/contexts/WalletContext";
  
 const configureChainsConfig = configureChains(
   [
+    optimism,
+    arbitrum,
     polygon,
-    optimismGoerli
+    mainnet,
   ],
   [
     alchemyProvider({
@@ -25,16 +28,33 @@ const configureChainsConfig = configureChains(
   ]
 );
 
+const { chains, provider, webSocketProvider } = configureChainsConfig;
+
+const { connectors } = getDefaultWallets({
+  appName: 'Minting Page',
+  projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+  webSocketProvider,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <PrivyProvider appId={process.env.PRIVY_APP_ID as string}>
-      <PrivyWagmiConnector wagmiChainsConfig={configureChainsConfig}>
-        <ToastContainer />
-        <Analytics />
-        <Navbar />
-        <Component {...pageProps} />
-      </PrivyWagmiConnector>
-    </PrivyProvider>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <WalletProvider>
+          <ToastContainer />
+          <Analytics />
+          <Navbar />
+          <Component {...pageProps} />
+        </WalletProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
 
