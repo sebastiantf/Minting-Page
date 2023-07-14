@@ -1,15 +1,31 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Image from 'next/image';
-import Link from 'next/link';
+import MarketplaceButtons from '../components/MarketplaceButtons';
 import { getReleaseDetails } from '../lib/getReleaseDetails';
 import getIpfsLink from "../lib/getIpfsLink";
+import CountdownText from '../components/CountdownText';
+import { useAccount, useSigner } from 'wagmi';
 import Box from '../components/Box';
 
 const Home: NextPage = (props: any) => {
-  const [mintQuantity, setMintQuantity] = useState(1);
+  console.log("TEST", props.contractData)
+  const blurRef = useRef<HTMLDivElement | null>(null);
+  const endDate = new Date(props.contractData.data.saleEnd * 1000);
+  const { address: account } = useAccount();
+  const { data: signer } = useSigner();
+
+  useEffect(() => {
+    if (blurRef.current) blurRef.current.style.display = "none";
+    setTimeout(() => blurRef.current && (blurRef.current.style.display = "block"))
+  }, []);
+
+  const paragraphs = props.contractData.metadata.description.split('\n\n');
+  const renderedParagraphs = paragraphs.map((paragraph: string, index: number) => (
+    <p className='py-2' key={index}>{paragraph}</p>
+  ));
 
   return <>
     <Head>
@@ -19,52 +35,77 @@ const Home: NextPage = (props: any) => {
         content={props.contractData.metadata.description}
       />
       <link rel="icon" href={getIpfsLink(props.contractData.metadata.image)} />
+      <meta property='og:type' content="website" />
+      <meta property='og:url' content={"https://featured.decent.xyz/"} />
+      <meta property='og:image' content={getIpfsLink(props.contractData.metadata.image)} />
+      <meta property='og:title' content={props.contractData.data.name} />
+      <meta property='og:description' content={props.contractData.metadata.description} />
+      <meta name='twitter:card' content={"summary_large_image"} />
+      <meta name='twitter:url' content={"https://featured.decent.xyz/"} />
+      <meta name='twitter:title' content={props.contractData.data.name} />
+      <meta name='twitter:description' content={props.contractData.metadata.description} />
+      <meta name='twitter:image' content={getIpfsLink(props.contractData.metadata.image)} />
     </Head>
-
-    <main className={`${styles.main}`}>
-      <div className='grid md:grid-cols-2 place-items-center w-full mt-[10vh] sm:mt-0'>
-        <div className='md:h-[80vh] md:border-r border-black w-full'>
-          <h1 className='p-8 border-b border-black text-7xl flex-items-center'>{props.contractData.data.name}</h1>
-          <div className='font-[300] p-8 max-h-[50vh] overflow-y-scroll sm:border-b border-black text-sm'>
-            {props.contractData.metadata.description}
+    <main className={`${styles.main} md:mt-0 sm:mt-16 mt-28`}>
+      <div className='w-full flex flex-wrap'>
+        <div className='md:border-r border-black w-full md:w-2/5 relative md:h-[80vh] overflow-y-auto'>
+          <h1 className='px-8 2xl:text-6xl md:text-7xl text-6xl flex-items-center text-[#FF0000] pb-4 pt-8 md:mb-0 mb-4'>{props.contractData.data.name}</h1>
+          <div className='p-8'>
+            {renderedParagraphs}
           </div>
-          <div className='px-8 py-4 h-[10vh] sm:border-none border-y border-black'>
-            <div className='grid grid-cols-2'><p>Price:</p><p className='text-right'>{props.contractData.data.tokenPrice} MATIC</p></div>
-            <div className='grid grid-cols-2'>
-              <p>Minted:</p>
-              <p className='text-right'>{props.contractData.data.totalSupply} / {props.contractData.data.MAX_TOKENS > 99999999 ? "Open" : props.contractData.data.MAX_TOKENS}</p>
+          <div className='px-8 border-black border-t pt-8 md:inline-block w-full hidden pb-16'>
+            <div className='w-full'>
+              <Box
+                  className='border rounded-xl p-4'
+                  walletAddress={account}
+                  signer={signer}
+                  chainId={props.contractData.chainId} 
+                  nftAddress={props.contractData.address} 
+                  price={props.contractData.data.tokenPrice} 
+                />
             </div>
           </div>
         </div>
 
-        <div className='flex items-center justify-center w-full px-4 my-4 sm:px-8 sm:my-0'>
+        <div className='md:w-3/5 collectionBannerFlex flex items-center'>
+           {/* <video src="/images/charmverse-nft.mp4" autoPlay loop playsInline muted /> */}
+           <Image src="/images/static-nft.png" fill alt={'nft'} />
+          <div ref={blurRef} className="blurrer"></div>
           <div className='space-y-3'>
-            <div className='h-[350px] w-[350px] relative'>
-              <div style={{ height: "100%", width: "100%" }}>
-                <Image className="drop-shadow-lg" src={getIpfsLink(props.contractData.metadata.image)} object-fit="contain" fill alt={'nft'} />
+            {/* NEED TO UPDATE BASED ON YOUR MEDIA TYPE */}
+            <div className='flex justify-center'>
+              <div style={{ height: "85%", width: "85%" }}>
+                <video className="drop-shadow-lg rounded-lg" src={getIpfsLink(props.contractData.metadata.animation_url)} autoPlay loop playsInline muted />
               </div>
-              {!!props.contractData.metadata.animation_url && <audio className='absolute h-8 transform -translate-x-1/2 bottom-2 left-1/2' controls src={getIpfsLink(props.contractData.metadata.animation_url)}></audio>}
-              </div>
-              {/* Change to GaslessMintButton for free NFTs */}
-            <Box
-              className=''
-              chainId={props.contractData.chainId} 
-              address={props.contractData.address} 
-              price={props.contractData.data.tokenPrice} 
-              quantity={mintQuantity} 
-            />
+            </div>
           </div>
         </div>
+        <div className='w-full flex justify-center my-12 md:hidden'>
+          <Box
+            className='border rounded-xl p-4'
+            walletAddress={account}
+            signer={signer}
+            chainId={props.contractData.chainId} 
+            nftAddress={props.contractData.address} 
+            price={props.contractData.data.tokenPrice} 
+          />
+        </div>
       </div>
-
-      {/* would appreciate the footer s/o but do what you will 🤝 */}
-      <footer className='sm:fixed bottom-0 w-full h-[10vh] border-t border-black justify-center flex items-center bg-white'>
-        <p className='pr-2 tracking-widest text-sm font-[400]'>Powered by </p>
-        <Link href="http://decent.xyz/" className='pt-1'>
-          <Image src='/images/decent.png' height={12} width={85} alt='Decent 💪' />
-        </Link>
-      </footer>
     </main>
+    <footer className='md:fixed bottom-0 w-full h-[10vh] border-t border-black justify-center flex items-center bg-white relative gap-12'>
+      <div className='flex gap-4'>
+        <p>Claimed:</p>
+        <p className='text-right text-[#FF0000]'>{props.contractData.data.totalSupply.toLocaleString()} | Open</p>
+      </div>
+      {/* indefinitely open = just comment out sale countdown */}
+      {/* <div className='hidden sm:inline-block'>
+        <MarketplaceButtons decentLink={"https://decent.xyz"} />
+      </div>
+      <div className='flex gap-4'>
+        <p>Sale Ends:</p>
+        <CountdownText className='text-[#FF0000] sm:w-40' dropTime={endDate} />
+      </div> */}
+    </footer>
   </>
 };
 

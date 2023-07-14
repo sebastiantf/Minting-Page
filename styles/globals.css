@@ -68,3 +68,21 @@ h1 {
     padding-right: 8px;
 }
 
+.collectionBannerFlex, .collectionBannerGrid {
+  width: 100%;
+  position: relative;
+}
+
+.collectionBannerFlex {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.blurrer {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .2);
+  backdrop-filter: blur(150px);
+}

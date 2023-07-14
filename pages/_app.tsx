@@ -1,4 +1,5 @@
-import "@decent.xyz/the-box/dist/the-box-base.css"; 
+import "@decent.xyz/the-box/dist/the-box-base.css";
+import '@rainbow-me/rainbowkit/styles.css'; 
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Navbar from '../components/Navbar/Navbar';
@@ -9,7 +10,7 @@ import { configureChains, WagmiConfig, createClient } from 'wagmi';
 import { arbitrum, optimism, mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, getDefaultWallets, lightTheme } from "@rainbow-me/rainbowkit";
 import { WalletProvider } from "../lib/contexts/WalletContext";
  
 const configureChainsConfig = configureChains(
@@ -46,15 +47,23 @@ const wagmiClient = createClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <WalletProvider>
-          <ToastContainer />
-          <Analytics />
-          <Navbar />
-          <Component {...pageProps} />
-        </WalletProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <RainbowKitProvider
+      chains={chains}
+      modalSize="compact"
+      theme={lightTheme({
+        accentColor: '#9969FF',
+        accentColorForeground: 'white',
+        borderRadius: 'small',
+        fontStack: 'system',
+        overlayBlur: 'small',
+      })}
+      >
+      <Navbar />
+      <Component {...pageProps} />
+      <Analytics />
+      <ToastContainer />
+    </RainbowKitProvider>
+  </WagmiConfig>
   );
 }
 
