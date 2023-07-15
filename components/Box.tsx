@@ -13,8 +13,6 @@ import NumberTicker from "./NumberTicker";
 const Box = (props:any):JSX.Element => {
   const [quantity, setQuantity] = useState(1);
 
-  console.log("TEST", ethers.utils.parseEther(props.price).add(ethers.utils.parseEther(".00044")).mul(quantity))
-
   return <div>
     <div className='text-xl font-[400] pb-4'>Mint:</div>
     <div className="pb-6">

@@ -11,7 +11,6 @@ import { useAccount, useSigner } from 'wagmi';
 import Box from '../components/Box';
 
 const Home: NextPage = (props: any) => {
-  console.log("TEST", props.contractData)
   const blurRef = useRef<HTMLDivElement | null>(null);
   const endDate = new Date(props.contractData.data.saleEnd * 1000);
   const { address: account } = useAccount();
