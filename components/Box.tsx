@@ -13,6 +13,8 @@ import NumberTicker from "./NumberTicker";
 const Box = (props:any):JSX.Element => {
   const [quantity, setQuantity] = useState(1);
 
+  console.log("TEST", ethers.utils.parseEther(props.price).add(ethers.utils.parseEther(".00044")).mul(quantity))
+
   return <div>
     <div className='text-xl font-[400] pb-4'>Mint:</div>
     <div className="pb-6">
@@ -24,14 +26,15 @@ const Box = (props:any):JSX.Element => {
     signer={props.signer || null}
     nftParams={{
       address: props.nftAddress,
-      chainId: props.chainId,
+      chainId: 10,
       paymentToken: ethers.constants.AddressZero,
       mintParams: {
         abi: "function mint(address to,uint256 numberOfTokens) payable",
-        params: [props.walletAddress, props.quantity],
+        params: [props.walletAddress, quantity],  
         cost: ethers.utils.parseEther(props.price).add(ethers.utils.parseEther(".00044")).mul(quantity),
         endSupply: {
           maxCap: 99999999999,
+          sellOutDate: 4294967295,
         }
       },
       displayCost: "0.00044 ETH" 

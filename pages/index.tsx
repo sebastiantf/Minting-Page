@@ -54,15 +54,15 @@ const Home: NextPage = (props: any) => {
             {renderedParagraphs}
           </div>
           <div className='px-8 border-black border-t pt-8 md:inline-block w-full hidden pb-16'>
-            <div className='w-full'>
+            <div className='w-full'> 
               <Box
-                  className='border rounded-xl p-4'
-                  walletAddress={account}
-                  signer={signer}
-                  chainId={props.contractData.chainId} 
-                  nftAddress={props.contractData.address} 
-                  price={props.contractData.data.tokenPrice} 
-                />
+                className='border rounded-xl p-4'
+                walletAddress={account}
+                signer={signer}
+                chainId={props.contractData.chainId} 
+                nftAddress={props.contractData.address} 
+                price={props.contractData.data.tokenPrice} 
+              />
             </div>
           </div>
         </div>

@@ -11,7 +11,6 @@ import { arbitrum, optimism, mainnet, polygon } from "wagmi/chains";
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from "@rainbow-me/rainbowkit";
-import { WalletProvider } from "../lib/contexts/WalletContext";
  
 const configureChainsConfig = configureChains(
   [
@@ -22,7 +21,7 @@ const configureChainsConfig = configureChains(
   ],
   [
     alchemyProvider({
-      apiKey: `${process.env.ALCHEMY_API_KEY}`,
+      apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
       priority: 0,
     }),
     publicProvider({ priority: 1 }),
