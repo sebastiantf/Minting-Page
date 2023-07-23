@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <>
       <nav className={`${styles.navbar} w-full flex flex-wrap items-center sm:justify-between justify-center border-b border-black drop-shadow-md`} >
-        <NavItem href="https://decent.xyz" openInNewTab><Image width={150} height={60} src="/images/charmverse.png" alt="decent" /></NavItem>
+        <NavItem href="https://decent.xyz" openInNewTab><Image width={150} height={60} src="/images/decent.png" alt="decent" /></NavItem>
         <div className="flex items-center gap-4">
           <ConnectWallet />
           <Link href='https://github.com/decentxyz/Minting-Page' target='_blank'>
