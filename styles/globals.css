@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter-Tight:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter%20Tight:wght@300;400;500;600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -68,3 +68,21 @@ h1 {
     padding-right: 8px;
 }
 
+.collectionBannerFlex, .collectionBannerGrid {
+  width: 100%;
+  position: relative;
+}
+
+.collectionBannerFlex {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.blurrer {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, .2);
+  backdrop-filter: blur(150px);
+}

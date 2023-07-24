@@ -5,7 +5,7 @@ const MarketplaceButtons = (props:any) => {
 
   return ( 
     <Link href={props.decentLink} target="_blank" rel="noreferrer">
-    <Image src="/images/decent-icon.png" height={36} width={36} alt="decent"/></Link>
+    <Image className="hover:drop-shadow-lg" src="/images/decent-icon.png" height={36} width={36} alt="decent"/></Link>
   )
 }
 
