@@ -82,18 +82,17 @@ const Home: NextPage = (props: any) => {
 
         <div className='md:w-3/5 collectionBannerFlex flex items-center relative'>
           {isVideo ? 
-            <video className="drop-shadow-lg rounded-lg absolute inset-0 w-full h-full object-cover" src={props.nftDetails.metadata.media} autoPlay loop playsInline muted />
-            : <Image className="drop-shadow-lg rounded-lg" src={props.nftDetails.metadata.image} fill alt={'nft'} />
+            <video className="drop-shadow-lg rounded-lg absolute inset-0 w-full h-full object-cover" src={props.nftDetails?.metadata.media} autoPlay loop playsInline muted />
+            : <Image className="drop-shadow-lg rounded-lg" src={props.nftDetails.metadata?.image} fill alt={'nft'} />
           }
           <div ref={blurRef} className="blurrer"></div>
           <div className='space-y-3'>
-            {/* NEED TO UPDATE BASED ON YOUR MEDIA TYPE */}
             <div className='flex justify-center'>
               {isVideo ? 
                 <div style={{ height: "85%", width: "85%", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-                  <video className="drop-shadow-lg rounded-lg" src={props.nftDetails.metadata.media} autoPlay loop playsInline muted style={{ width: "100%", height: "100%" }} />
+                  <video className="drop-shadow-lg rounded-lg" src={props.nftDetails?.metadata.media} autoPlay loop playsInline muted style={{ width: "100%", height: "100%" }} />
                 </div>
-                : <Image className="drop-shadow-lg rounded-lg" src={props.nftDetails.metadata.image} height={600} width={600} alt={'nft'} />
+                : <Image className="drop-shadow-lg rounded-lg" src={props.nftDetails?.metadata.image} height={600} width={600} alt={'nft'} />
               }
             </div>
           </div>
@@ -111,7 +110,7 @@ const Home: NextPage = (props: any) => {
         <p>Claimed:</p>
         <p className='text-right text-[#A378FF]'>{props.constants.decentNft ? nftsMinted : props.nftDetails.data.totalSupply} | {props.constants.maxTokens > 999999 ? "Open" : props.constants.maxTokens}</p>
       </div>
-      {/* if open indefinitely, just comment out sale countdown */}
+      {/* if open indefinitely, replace sale countdown */}
       <div className='hidden sm:inline-block'>
         <MarketplaceButtons decentLink={"https://decent.xyz"} />
       </div>
@@ -126,7 +125,8 @@ const Home: NextPage = (props: any) => {
 export default Home;
 
 export async function getStaticProps() {
-  // IMPORTANT UPDATE: change constants to fetch your NFT & set data that cannot be determined dynamically.
+  {/* -------------------------NFT Settings-------------------------- */}
+  // change constants to fetch your NFT & set data that cannot be determined dynamically
   let constants = {
     decentNft: true,
     address: '0x80F4bABDcba710E6B0C07c760c3C5B061C31b6C0',
@@ -135,6 +135,7 @@ export async function getStaticProps() {
     maxTokens: 4294967295,
     sellOutDate: 4294967295
   }
+  {/* --------------------------------------------------------------- */}
 
   // NOTE: to retrieve metadata for non-Decent NFTs, at least 1 NFT from the collection must already be minted!!
   let nftDetails;
