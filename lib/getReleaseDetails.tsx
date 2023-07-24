@@ -1,7 +1,6 @@
 import axios from "axios";
 import { NftDetails } from "./types/NftDetails";
 import getIpfsLink from "./getIpfsLink";
-import { Network, Alchemy } from "alchemy-sdk";
 
 export const getDecentNftDetails = async (chainId: number, address: string) => {
   let nftDetails: NftDetails;
