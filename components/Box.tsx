@@ -24,26 +24,26 @@ const Box = (props:any):JSX.Element => {
       className={`${props.className}`}
       signer={signer || null}
       nftParams={{
-        address: '0x151611535DDc74d54e7c2e56B78D35865a77e72C',
+        address: '0x023Aafc1155c700CdefAb18547e37038Ad92720C',
         chainId: 137,
         // paymentToken: ethers.constants.AddressZero,
         mintParams: {
           // abi: 'function mint(bytes32 r,bytes32 s,uint8 v) payable',
           abi: 'function executeMetaTransaction(address userAddress,bytes memory functionSignature,bytes32 sigR,bytes32 sigS,uint8 sigV) payable',
           params: [
-            '0xc1E8c14df902f4F5b97622B08BC4B052A64c0e2c',
-            '0x1b424fed28f82578826be7395f6c86bfa87eef65c0ed34becbed6bfb3532a968aee60fc5681dbdc0d192bfe35af9bd253250769563f17a3d722866ad0de10977b9362ee5000000000000000000000000000000000000000000000000000000000000001c',
-            '0xb19be905eba55023795d2434031433f7c93ecd4095c1b059c1085c98115c9439',
-            '0x68102f2efe8e453747d8aa6b316b21301be554a878893e38aede681096403a59',
-            27
+            '0xB21e3Bcaf3b670904cFc482eB3eb1880f3eD2A0a',
+            '0x963084a000000000000000000000000033d73cc0e060939476a10e47b86a4568c7dcf261000000000000000000000000000000000000000000000000000000000000000073844de878b61e429f1030cbdebf8e7831a06649828d50e0b6bcd51d653e59956e9582c0d42aa47587892a5de77b4b58494a52bceb01f59a0114c4d0cadb7b6c000000000000000000000000000000000000000000000000000000000000001b',
+            '0x2f2f941486d24f0b682f89968c97702e316a3fa698add114c87f843456d0467f',
+            '0x5f0cd1a4c8cb1232578891ea937f5e02ce5ce6e5cce174c33116012f65be0389',
+            28
           ],
-          cost: ethers.utils.parseEther('0.75'),
+          cost: 0,
           endSupply: {
             maxCap: 10,
           },
         },
-        title: 'test box polygon pay on arb',
-        displayCost: '0.75 MATIC',
+        title: 'test box polygon token campaign pay on arb',
+        displayCost: '0 MATIC',
       }}
       options={{
         allowSecondary: true,
