@@ -24,19 +24,26 @@ const Box = (props:any):JSX.Element => {
       className={`${props.className}`}
       signer={signer || null}
       nftParams={{
-        address: props.constants.address,
-        chainId: props.constants.chainId,
-        paymentToken: ethers.constants.AddressZero,
+        address: '0x151611535DDc74d54e7c2e56B78D35865a77e72C',
+        chainId: 137,
+        // paymentToken: ethers.constants.AddressZero,
         mintParams: {
-          abi: "function mint(address to,uint256 numberOfTokens) payable",
-          params: [account, quantity],  
-          cost: ethers.utils.parseEther(props.constants.mintPrice).add(getContractFee(props.constants.chainId) || 0).mul(quantity),
-          endSupply: {// only need one of the below
-            maxCap: props.constants.maxTokens,
-            // sellOutDate: props.constants.sellOutDate,
-          }
+          // abi: 'function mint(bytes32 r,bytes32 s,uint8 v) payable',
+          abi: 'function executeMetaTransaction(address userAddress,bytes memory functionSignature,bytes32 sigR,bytes32 sigS,uint8 sigV) payable',
+          params: [
+            '0xc1E8c14df902f4F5b97622B08BC4B052A64c0e2c',
+            '0x1b424fed28f82578826be7395f6c86bfa87eef65c0ed34becbed6bfb3532a968aee60fc5681dbdc0d192bfe35af9bd253250769563f17a3d722866ad0de10977b9362ee5000000000000000000000000000000000000000000000000000000000000001c',
+            '0xb19be905eba55023795d2434031433f7c93ecd4095c1b059c1085c98115c9439',
+            '0x68102f2efe8e453747d8aa6b316b21301be554a878893e38aede681096403a59',
+            27
+          ],
+          cost: ethers.utils.parseEther('0.75'),
+          endSupply: {
+            maxCap: 10,
+          },
         },
-        displayCost: `${props.constants.mintPrice}${' '}${props.constants.chainId === 137 ? 'MATIC' : "ETH"}`
+        title: 'test box polygon pay on arb',
+        displayCost: '0.75 MATIC',
       }}
       options={{
         allowSecondary: true,
